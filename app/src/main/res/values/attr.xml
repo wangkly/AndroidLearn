@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="rightPadding" format="dimension" />
+
+    <attr name="orientation" >
+        <enum name="horizontal" value="0"></enum>
+        <enum name="vertical" value="1"></enum>
+    </attr>
+
+    
+    <declare-styleable name="AnimateViewGroup">
+        <attr name="rightPadding" />
+        <attr name="orientation" />
+    </declare-styleable>
+
+</resources>
