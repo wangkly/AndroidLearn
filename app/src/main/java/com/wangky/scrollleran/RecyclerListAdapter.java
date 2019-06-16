@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -60,6 +61,23 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             super(itemView);
             image = itemView.findViewById(R.id.recycler_img);
             textView = itemView.findViewById(R.id.recycler_txt);
+        }
+    }
+
+
+    class FooterViewHolder extends RecyclerView.ViewHolder{
+
+        private ProgressBar progressBar;
+
+        private TextView fText;
+
+
+        public FooterViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            progressBar = itemView.findViewById(R.id.recycler_footer_progress);
+
+            fText = itemView.findViewById(R.id.recycler_footer_txt);
         }
     }
 
