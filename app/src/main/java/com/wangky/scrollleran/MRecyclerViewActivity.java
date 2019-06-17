@@ -39,14 +39,14 @@ public class MRecyclerViewActivity extends AppCompatActivity {
 //        lineM.setOrientation(LinearLayoutManager.HORIZONTAL);
 
 
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
 
-//        GridLayoutManager layoutManager = new GridLayoutManager(MRecyclerViewActivity.this,2,GridLayout.VERTICAL,false);
+        GridLayoutManager layoutManager = new GridLayoutManager(MRecyclerViewActivity.this,2,GridLayout.VERTICAL,false);
 
 
         mRecyclerView.setLayoutManager(layoutManager);
 
-        List<RecyclerItem> list = new ArrayList<>();
+        final List<RecyclerItem> list = new ArrayList<>();
 
         for (int i =0 ;i < 20;i++){
 
@@ -56,7 +56,7 @@ public class MRecyclerViewActivity extends AppCompatActivity {
         }
 
 
-        RecyclerListAdapter adapter = new RecyclerListAdapter(list);
+        final RecyclerListAdapter adapter = new RecyclerListAdapter(list);
 
         mRecyclerView.setAdapter(adapter);
 
@@ -84,7 +84,36 @@ public class MRecyclerViewActivity extends AppCompatActivity {
         });
 
 
+        mRecyclerView.addOnScrollListener(new RecyclerViewScrollListener() {
+            @Override
+            public void loadMore() {
 
+                adapter.setLoadState(adapter.LOADING);
+
+                Handler handler = new Handler();
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if(list.size() >= 60){
+                            adapter.setLoadState(adapter.LOAD_END);
+                            return;
+                        }
+
+                        for (int i =0 ;i < 20;i++){
+                            RecyclerItem item = new RecyclerItem("wanggang"+i);
+                            list.add(item);
+
+                            }
+
+                     adapter.setLoadState(adapter.LOAD_COMPLETE);
+                    }
+                },3000);
+
+            }
+
+        });
 
 
     }
