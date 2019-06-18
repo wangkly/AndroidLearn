@@ -9,6 +9,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
+import android.view.View;
 import android.widget.GridLayout;
 import android.widget.Toast;
 
@@ -114,6 +116,20 @@ public class MRecyclerViewActivity extends AppCompatActivity {
             }
 
         });
+
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerViewItemTouchListener(MRecyclerViewActivity.this, mRecyclerView, new RecyclerViewItemTouchListener.ItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                Log.i("recyclerview click",String.valueOf(position));
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        }));
 
 
     }

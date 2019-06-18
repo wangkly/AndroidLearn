@@ -4,12 +4,15 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -64,10 +67,21 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
         if(viewHolder instanceof ViewHolder){
-            RecyclerItem item = mList.get(i);
+            final RecyclerItem item = mList.get(i);
+
             ViewHolder holder = (ViewHolder) viewHolder;
+            LinearLayout itemLine =  holder.item_line;
+
             holder.image.setImageResource(R.drawable.ic_arrow);
             holder.textView.setText(item.getName());
+
+//            itemLine.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Log.i("RecyclerListAdapter","recycler item click"+ item.getName());
+//                }
+//            });
+
 
         }else if(viewHolder instanceof  FooterViewHolder){
 
@@ -127,12 +141,15 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        private LinearLayout item_line;
+
         private ImageView image;
 
         private TextView textView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            item_line = itemView.findViewById(R.id.item_line);
             image = itemView.findViewById(R.id.recycler_img);
             textView = itemView.findViewById(R.id.recycler_txt);
         }
